@@ -11,7 +11,7 @@ const HeroSection = () => {
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center max-w-4xl pt-16">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-primary-foreground leading-tight mb-6">
+        <h1 className="text-2xl sm:text-3xl lg:text-5xl font-extrabold text-primary-foreground leading-tight mb-6 md:text-3xl">
           Solusi Terpadu Dalam Pelayanan{" "}
           <span className="text-gradient-gold italic">One-Stop Solution</span>
           <br />
@@ -19,13 +19,13 @@ const HeroSection = () => {
         </h1>
         <a
           href="#tentang"
-          className="inline-block mt-4 px-8 py-3 bg-[#2563EB] text-primary-foreground font-semibold text-sm rounded-lg hover:bg-[#1D4ED8] transition-all duration-300"
-        >
+          className="inline-block mt-4 px-8 py-3 bg-[#2563EB] text-primary-foreground font-semibold text-sm rounded-lg hover:bg-[#1D4ED8] transition-all duration-300">
+
           PELAJARI TENTANG KAMI
         </a>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 export default HeroSection;
