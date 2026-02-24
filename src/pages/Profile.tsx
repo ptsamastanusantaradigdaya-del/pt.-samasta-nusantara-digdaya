@@ -11,12 +11,12 @@ import KomisarisDetail from "@/components/profile/KomisarisDetail";
 import buildingBg from "@/assets/building-bg.jpg";
 
 const subPages = [
-  { key: "tentang-kami", label: "Tentang Kami" },
-  { key: "struktur-manajemen", label: "Struktur Manajemen" },
-  { key: "sejarah", label: "Sejarah" },
-  { key: "legalitas", label: "Legalitas & Perizinan" },
-  { key: "keunggulan", label: "Keunggulan" },
-];
+{ key: "tentang-kami", label: "Tentang Kami" },
+{ key: "struktur-manajemen", label: "Struktur Manajemen" },
+{ key: "sejarah", label: "Sejarah" },
+{ key: "legalitas", label: "Legalitas & Perizinan" },
+{ key: "keunggulan", label: "Keunggulan" }];
+
 
 const Profile = () => {
   const { subPage } = useParams();
@@ -34,8 +34,8 @@ const Profile = () => {
         <Navbar />
         <main><KomisarisUtamaDetail /></main>
         <Footer />
-      </div>
-    );
+      </div>);
+
   }
 
   if (activeTab === "komisaris") {
@@ -44,8 +44,8 @@ const Profile = () => {
         <Navbar />
         <main><KomisarisDetail /></main>
         <Footer />
-      </div>
-    );
+      </div>);
+
   }
 
   const renderContent = () => {
@@ -108,21 +108,21 @@ const Profile = () => {
       {/* Sub-navigation tabs */}
       <div className="bg-card border-b border-border sticky top-16 z-40">
         <div className="container mx-auto px-4">
-          <div className="flex overflow-x-auto gap-1 py-1 scrollbar-hide">
-            {subPages.map((tab) => (
-              <Link
-                key={tab.key}
-                to={`/profil/${tab.key}`}
-                className={`whitespace-nowrap px-4 py-2.5 text-sm font-medium rounded-lg transition-colors ${
-                  activeTab === tab.key
-                    ? "bg-[#1E3A8A] text-primary-foreground"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                }`}
-              >
-                {tab.label}
-              </Link>
-            ))}
-          </div>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
       </div>
 
@@ -130,8 +130,8 @@ const Profile = () => {
       <main>{renderContent()}</main>
 
       <Footer />
-    </div>
-  );
+    </div>);
+
 };
 
 export default Profile;
