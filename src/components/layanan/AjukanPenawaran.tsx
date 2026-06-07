@@ -2,12 +2,13 @@ import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { ArrowLeft, CheckCircle, Mail, Phone, Send } from "lucide-react";
+import { ArrowLeft, CheckCircle, Mail, Phone, Send, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 interface ServiceOption {
   name: string;
@@ -142,6 +143,15 @@ const AjukanPenawaran = () => {
   const config = serviceConfigs[serviceType || ""];
   const { toast } = useToast();
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  const [submitting, setSubmitting] = useState(false);
+  const [form, setForm] = useState({
+    nama_lengkap: "",
+    nama_perusahaan: "",
+    email: "",
+    whatsapp: "",
+    deskripsi: "",
+    estimasi_waktu: "",
+  });
 
   if (!config) {
     return (
@@ -164,12 +174,38 @@ const AjukanPenawaran = () => {
     );
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Permintaan terkirim!",
-      description: "Tim kami akan menghubungi Anda dalam waktu 1×24 jam.",
-    });
+    if (submitting) return;
+    setSubmitting(true);
+    try {
+      const { error } = await supabase.from("pengajuan_penawaran").insert({
+        nama_lengkap: form.nama_lengkap.trim(),
+        nama_perusahaan: form.nama_perusahaan.trim(),
+        email: form.email.trim(),
+        whatsapp: form.whatsapp.trim(),
+        category_slug: "pemeliharaan",
+        scope_slug: serviceType,
+        selected_services: selectedServices,
+        deskripsi: form.deskripsi.trim(),
+        estimasi_waktu: form.estimasi_waktu.trim(),
+      });
+      if (error) throw error;
+      toast({
+        title: "Permintaan terkirim!",
+        description: "Tim kami akan menghubungi Anda dalam waktu 1×24 jam.",
+      });
+      setForm({ nama_lengkap: "", nama_perusahaan: "", email: "", whatsapp: "", deskripsi: "", estimasi_waktu: "" });
+      setSelectedServices([]);
+    } catch (err: any) {
+      toast({
+        title: "Gagal mengirim permintaan",
+        description: err?.message ?? "Silakan coba lagi.",
+        variant: "destructive",
+      });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -206,25 +242,46 @@ const AjukanPenawaran = () => {
                   <label className="block text-sm font-semibold text-foreground mb-2">
                     Nama Lengkap <span className="text-red-500">*</span>
                   </label>
-                  <Input placeholder="Masukkan nama lengkap Anda" required />
+                  <Input
+                    placeholder="Masukkan nama lengkap Anda"
+                    required
+                    value={form.nama_lengkap}
+                    onChange={(e) => setForm({ ...form, nama_lengkap: e.target.value })}
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-foreground mb-2">
                     Nama Perusahaan / Instansi / Lembaga <span className="text-red-500">*</span>
                   </label>
-                  <Input placeholder="Masukkan nama perusahaan / instansi / lembaga Anda" required />
+                  <Input
+                    placeholder="Masukkan nama perusahaan / instansi / lembaga Anda"
+                    required
+                    value={form.nama_perusahaan}
+                    onChange={(e) => setForm({ ...form, nama_perusahaan: e.target.value })}
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-foreground mb-2">
                     Email <span className="text-red-500">*</span>
                   </label>
-                  <Input type="email" placeholder="nama@perusahaan.com" required />
+                  <Input
+                    type="email"
+                    placeholder="nama@perusahaan.com"
+                    required
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-foreground mb-2">
                     Nomor WhatsApp <span className="text-red-500">*</span>
                   </label>
-                  <Input placeholder="+62 812-3456-7890" required />
+                  <Input
+                    placeholder="+62 812-3456-7890"
+                    required
+                    value={form.whatsapp}
+                    onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
+                  />
                 </div>
 
                 {/* Service Selection */}
@@ -282,19 +339,34 @@ const AjukanPenawaran = () => {
                   <label className="block text-sm font-semibold text-foreground mb-2">
                     Deskripsi Kebutuhan / Proyek <span className="text-red-500">*</span>
                   </label>
-                  <Textarea placeholder="Jelaskan kebutuhan dan detail proyek Anda secara lengkap..." rows={4} required />
+                  <Textarea
+                    placeholder="Jelaskan kebutuhan dan detail proyek Anda secara lengkap..."
+                    rows={4}
+                    required
+                    value={form.deskripsi}
+                    onChange={(e) => setForm({ ...form, deskripsi: e.target.value })}
+                  />
                 </div>
 
                 <div>
                   <label className="block text-sm font-semibold text-foreground mb-2">
                     Estimasi Waktu Pengerjaan <span className="text-red-500">*</span>
                   </label>
-                  <Input placeholder="Contoh: 3 bulan" required />
+                  <Input
+                    placeholder="Contoh: 3 bulan"
+                    required
+                    value={form.estimasi_waktu}
+                    onChange={(e) => setForm({ ...form, estimasi_waktu: e.target.value })}
+                  />
                 </div>
 
-                <Button type="submit" className="w-full bg-[#1E3A8A] hover:bg-[#1D4ED8] text-white py-6 text-sm font-semibold">
-                  <Send size={16} />
-                  Kirim Permintaan
+                <Button
+                  type="submit"
+                  disabled={submitting}
+                  className="w-full bg-[#1E3A8A] hover:bg-[#1D4ED8] text-white py-6 text-sm font-semibold"
+                >
+                  {submitting ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
+                  {submitting ? "Mengirim..." : "Kirim Permintaan"}
                 </Button>
               </form>
             </div>
