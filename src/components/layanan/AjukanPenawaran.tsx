@@ -242,25 +242,46 @@ const AjukanPenawaran = () => {
                   <label className="block text-sm font-semibold text-foreground mb-2">
                     Nama Lengkap <span className="text-red-500">*</span>
                   </label>
-                  <Input placeholder="Masukkan nama lengkap Anda" required />
+                  <Input
+                    placeholder="Masukkan nama lengkap Anda"
+                    required
+                    value={form.nama_lengkap}
+                    onChange={(e) => setForm({ ...form, nama_lengkap: e.target.value })}
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-foreground mb-2">
                     Nama Perusahaan / Instansi / Lembaga <span className="text-red-500">*</span>
                   </label>
-                  <Input placeholder="Masukkan nama perusahaan / instansi / lembaga Anda" required />
+                  <Input
+                    placeholder="Masukkan nama perusahaan / instansi / lembaga Anda"
+                    required
+                    value={form.nama_perusahaan}
+                    onChange={(e) => setForm({ ...form, nama_perusahaan: e.target.value })}
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-foreground mb-2">
                     Email <span className="text-red-500">*</span>
                   </label>
-                  <Input type="email" placeholder="nama@perusahaan.com" required />
+                  <Input
+                    type="email"
+                    placeholder="nama@perusahaan.com"
+                    required
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-foreground mb-2">
                     Nomor WhatsApp <span className="text-red-500">*</span>
                   </label>
-                  <Input placeholder="+62 812-3456-7890" required />
+                  <Input
+                    placeholder="+62 812-3456-7890"
+                    required
+                    value={form.whatsapp}
+                    onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
+                  />
                 </div>
 
                 {/* Service Selection */}
