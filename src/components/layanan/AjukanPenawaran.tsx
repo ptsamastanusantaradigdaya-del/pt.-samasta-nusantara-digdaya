@@ -2,12 +2,13 @@ import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { ArrowLeft, CheckCircle, Mail, Phone, Send } from "lucide-react";
+import { ArrowLeft, CheckCircle, Mail, Phone, Send, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 interface ServiceOption {
   name: string;
