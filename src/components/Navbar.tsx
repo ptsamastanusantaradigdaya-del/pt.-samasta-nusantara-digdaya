@@ -28,7 +28,7 @@ const navLinks = [
   { label: "Beranda", href: "/" },
   { label: "Profil", href: "/profil", hasDropdown: true, dropdownKey: "profil" as const },
   { label: "Layanan", href: "/layanan", hasDropdown: true, dropdownKey: "layanan" as const },
-  { label: "Portofolio", href: "#portofolio" },
+  { label: "Portofolio", href: "/portofolio" },
   { label: "Berita", href: "#berita" },
   { label: "Kontak", href: "#kontak" },
 ];
