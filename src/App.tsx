@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Profile from "./pages/Profile";
 import Layanan from "./pages/Layanan";
+import Portofolio from "./pages/Portofolio";
 import PemeliharaanDetail from "./components/layanan/PemeliharaanDetail";
 import JasaProfesionalDetail from "./components/layanan/JasaProfesionalDetail";
 import PerdaganganDetail from "./components/layanan/PerdaganganDetail";
