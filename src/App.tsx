@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Profile from "./pages/Profile";
 import Layanan from "./pages/Layanan";
+import Portofolio from "./pages/Portofolio";
 import PemeliharaanDetail from "./components/layanan/PemeliharaanDetail";
 import JasaProfesionalDetail from "./components/layanan/JasaProfesionalDetail";
 import PerdaganganDetail from "./components/layanan/PerdaganganDetail";
@@ -32,6 +33,7 @@ const App = () => (
           <Route path="/layanan/event-organizer" element={<EventOrganizerDetail />} />
           <Route path="/layanan/pemeliharaan/:serviceType/penawaran" element={<AjukanPenawaran />} />
           <Route path="/layanan/:subPage" element={<Layanan />} />
+          <Route path="/portofolio" element={<Portofolio />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
