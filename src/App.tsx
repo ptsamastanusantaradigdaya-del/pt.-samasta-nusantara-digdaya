@@ -7,6 +7,8 @@ import Index from "./pages/Index";
 import Profile from "./pages/Profile";
 import Layanan from "./pages/Layanan";
 import Portofolio from "./pages/Portofolio";
+import Berita from "./pages/Berita";
+import Kontak from "./pages/Kontak";
 import PemeliharaanDetail from "./components/layanan/PemeliharaanDetail";
 import JasaProfesionalDetail from "./components/layanan/JasaProfesionalDetail";
 import PerdaganganDetail from "./components/layanan/PerdaganganDetail";
@@ -34,6 +36,8 @@ const App = () => (
           <Route path="/layanan/pemeliharaan/:serviceType/penawaran" element={<AjukanPenawaran />} />
           <Route path="/layanan/:subPage" element={<Layanan />} />
           <Route path="/portofolio" element={<Portofolio />} />
+          <Route path="/berita" element={<Berita />} />
+          <Route path="/kontak" element={<Kontak />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
