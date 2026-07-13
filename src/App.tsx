@@ -33,6 +33,7 @@ const App = () => (
           <Route path="/layanan/event-organizer" element={<EventOrganizerDetail />} />
           <Route path="/layanan/pemeliharaan/:serviceType/penawaran" element={<AjukanPenawaran />} />
           <Route path="/layanan/:subPage" element={<Layanan />} />
+          <Route path="/portofolio" element={<Portofolio />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
