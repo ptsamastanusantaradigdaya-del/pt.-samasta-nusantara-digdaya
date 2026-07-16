@@ -12,6 +12,14 @@ type Category = {
   color_theme: string | null;
 };
 
+// Static gradient map — dynamic Tailwind classes from DB would be purged.
+const GRADIENTS: Record<string, string> = {
+  pemeliharaan: "bg-gradient-to-r from-green-500 to-emerald-600",
+  "jasa-profesional": "bg-gradient-to-r from-blue-500 to-indigo-600",
+  perdagangan: "bg-gradient-to-r from-orange-500 to-amber-500",
+  "event-organizer": "bg-gradient-to-r from-purple-600 to-pink-500",
+};
+
 const LayananOverview = () => {
   const [services, setServices] = useState<Category[]>([]);
 
@@ -37,10 +45,10 @@ const LayananOverview = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {services.map((s) => {
             const Icon = getIcon(s.icon);
-            const gradient = s.color_theme ?? "from-blue-500 to-indigo-600";
+            const gradient = GRADIENTS[s.slug] ?? "bg-gradient-to-r from-blue-500 to-indigo-600";
             return (
               <div key={s.id} className="bg-card rounded-xl border border-border overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col">
-                <div className={`bg-gradient-to-r ${gradient} p-6`}>
+                <div className={`${gradient} p-6`}>
                   <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center mb-4">
                     <Icon className="w-6 h-6 text-white" />
                   </div>
