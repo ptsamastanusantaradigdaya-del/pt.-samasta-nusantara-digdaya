@@ -74,7 +74,7 @@ const Layanan = () => {
             Tim profesional kami siap membantu Anda menemukan solusi terbaik untuk mengembangkan bisnis Anda
           </p>
           <Link
-            to="/layanan/pemeliharaan/kebersihan-bangunan/penawaran"
+            to="/layanan/penawaran"
             className="inline-flex items-center gap-2 px-8 py-3 bg-white text-[#1E3A8A] font-semibold rounded-lg hover:bg-white/90 transition-colors text-sm"
           >
             Ajukan Penawaran →
