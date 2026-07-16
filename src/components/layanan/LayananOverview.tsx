@@ -48,7 +48,7 @@ const LayananOverview = () => {
             const gradient = GRADIENTS[s.slug] ?? "bg-gradient-to-r from-blue-500 to-indigo-600";
             return (
               <div key={s.id} className="bg-card rounded-xl border border-border overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col">
-                <div className={`bg-gradient-to-r ${gradient} p-6`}>
+                <div className={`${gradient} p-6`}>
                   <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center mb-4">
                     <Icon className="w-6 h-6 text-white" />
                   </div>
