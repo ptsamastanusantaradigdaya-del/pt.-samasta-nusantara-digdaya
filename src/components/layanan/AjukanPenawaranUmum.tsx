@@ -6,36 +6,11 @@ import { ArrowLeft, CheckCircle, Mail, Phone, Send, Loader2 } from "lucide-react
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
-const categories = [
-  {
-    slug: "pemeliharaan",
-    name: "Pemeliharaan, Perawatan, dan Pembuatan Lingkungan",
-    desc: "Layanan kebersihan bangunan, perawatan taman, pembuatan taman, serta pemeliharaan fasilitas dan lingkungan kerja.",
-  },
-  {
-    slug: "jasa-profesional",
-    name: "Jasa Profesional & Pengembangan SDM",
-    desc: "Konsultansi, pelatihan, pengembangan sumber daya manusia, dan penyediaan tenaga kerja profesional.",
-  },
-  {
-    slug: "perdagangan",
-    name: "Pengolahan dan Perdagangan Besar",
-    desc: "Pengadaan barang, perdagangan besar, distribusi, serta pengolahan produk untuk kebutuhan korporasi.",
-  },
-  {
-    slug: "event-organizer",
-    name: "Event Organizer, Kreatif & Media",
-    desc: "Penyelenggaraan acara, produksi kreatif, media, dokumentasi, dan aktivasi brand.",
-  },
-];
-
 const AjukanPenawaranUmum = () => {
   const { toast } = useToast();
-  const [selected, setSelected] = useState<string[]>([]);
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
     nama_lengkap: "",
