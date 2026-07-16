@@ -14,6 +14,7 @@ import JasaProfesionalDetail from "./components/layanan/JasaProfesionalDetail";
 import PerdaganganDetail from "./components/layanan/PerdaganganDetail";
 import EventOrganizerDetail from "./components/layanan/EventOrganizerDetail";
 import AjukanPenawaran from "./components/layanan/AjukanPenawaran";
+import AjukanPenawaranUmum from "./components/layanan/AjukanPenawaranUmum";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
