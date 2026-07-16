@@ -34,6 +34,7 @@ const App = () => (
           <Route path="/layanan/jasa-profesional" element={<JasaProfesionalDetail />} />
           <Route path="/layanan/perdagangan" element={<PerdaganganDetail />} />
           <Route path="/layanan/event-organizer" element={<EventOrganizerDetail />} />
+          <Route path="/layanan/penawaran" element={<AjukanPenawaranUmum />} />
           <Route path="/layanan/pemeliharaan/:serviceType/penawaran" element={<AjukanPenawaran />} />
           <Route path="/layanan/:subPage" element={<Layanan />} />
           <Route path="/portofolio" element={<Portofolio />} />
