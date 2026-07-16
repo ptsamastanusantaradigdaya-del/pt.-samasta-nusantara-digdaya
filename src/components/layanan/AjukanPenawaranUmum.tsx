@@ -6,36 +6,11 @@ import { ArrowLeft, CheckCircle, Mail, Phone, Send, Loader2 } from "lucide-react
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
-const categories = [
-  {
-    slug: "pemeliharaan",
-    name: "Pemeliharaan, Perawatan, dan Pembuatan Lingkungan",
-    desc: "Layanan kebersihan bangunan, perawatan taman, pembuatan taman, serta pemeliharaan fasilitas dan lingkungan kerja.",
-  },
-  {
-    slug: "jasa-profesional",
-    name: "Jasa Profesional & Pengembangan SDM",
-    desc: "Konsultansi, pelatihan, pengembangan sumber daya manusia, dan penyediaan tenaga kerja profesional.",
-  },
-  {
-    slug: "perdagangan",
-    name: "Pengolahan dan Perdagangan Besar",
-    desc: "Pengadaan barang, perdagangan besar, distribusi, serta pengolahan produk untuk kebutuhan korporasi.",
-  },
-  {
-    slug: "event-organizer",
-    name: "Event Organizer, Kreatif & Media",
-    desc: "Penyelenggaraan acara, produksi kreatif, media, dokumentasi, dan aktivasi brand.",
-  },
-];
-
 const AjukanPenawaranUmum = () => {
   const { toast } = useToast();
-  const [selected, setSelected] = useState<string[]>([]);
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
     nama_lengkap: "",
@@ -46,16 +21,10 @@ const AjukanPenawaranUmum = () => {
     estimasi_waktu: "",
   });
 
-  const toggle = (slug: string) =>
-    setSelected((p) => (p.includes(slug) ? p.filter((s) => s !== slug) : [...p, slug]));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (submitting) return;
-    if (selected.length === 0) {
-      toast({ title: "Pilih minimal satu layanan", variant: "destructive" });
-      return;
-    }
     setSubmitting(true);
     try {
       const { error } = await supabase.from("pengajuan_penawaran").insert({
@@ -63,11 +32,9 @@ const AjukanPenawaranUmum = () => {
         nama_perusahaan: form.nama_perusahaan.trim(),
         email: form.email.trim(),
         whatsapp: form.whatsapp.trim(),
-        category_slug: selected.length === 1 ? selected[0] : "umum",
+        category_slug: "umum",
         scope_slug: null,
-        selected_services: selected.map(
-          (s) => categories.find((c) => c.slug === s)?.name || s
-        ),
+        selected_services: [],
         deskripsi: form.deskripsi.trim(),
         estimasi_waktu: form.estimasi_waktu.trim(),
       });
@@ -77,7 +44,6 @@ const AjukanPenawaranUmum = () => {
         description: "Tim kami akan menghubungi Anda dalam waktu 1×24 jam.",
       });
       setForm({ nama_lengkap: "", nama_perusahaan: "", email: "", whatsapp: "", deskripsi: "", estimasi_waktu: "" });
-      setSelected([]);
     } catch (err: any) {
       toast({
         title: "Gagal mengirim permintaan",
@@ -161,38 +127,6 @@ const AjukanPenawaranUmum = () => {
                     value={form.whatsapp}
                     onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
                   />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-foreground mb-2">
-                    Layanan yang Dibutuhkan <span className="text-red-500">*</span>
-                    <span className="text-muted-foreground font-normal ml-1">(Dapat memilih lebih dari satu)</span>
-                  </label>
-                  <div className="space-y-3 mt-4">
-                    {categories.map((c) => (
-                      <div
-                        key={c.slug}
-                        onClick={() => toggle(c.slug)}
-                        className={`rounded-xl border-2 p-4 cursor-pointer transition-colors ${
-                          selected.includes(c.slug)
-                            ? "border-[#1E3A8A] bg-blue-50/50"
-                            : "border-border"
-                        }`}
-                      >
-                        <div className="flex items-start gap-3">
-                          <Checkbox
-                            checked={selected.includes(c.slug)}
-                            onCheckedChange={() => toggle(c.slug)}
-                            className="mt-1"
-                          />
-                          <div>
-                            <h4 className="font-bold text-foreground text-sm mb-1">{c.name}</h4>
-                            <p className="text-xs text-muted-foreground leading-relaxed">{c.desc}</p>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
                 </div>
 
                 <div>
